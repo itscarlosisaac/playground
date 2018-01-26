@@ -10,7 +10,11 @@ const app = express();
 
 /*
     List of routes needed for the API
-    
+
+    // GETS - POSTS - PUT - DELETE
+    - dino
+    - dino/:id
+    - facts
 */
 
 app.get('/', (req, res) => {
