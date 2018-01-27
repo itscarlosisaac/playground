@@ -1,20 +1,13 @@
 const express = require('express');
 const Router = express.Router();
-const Dino = require('./db/Model');
+const Dino = require('../db/Model');
 const bodyParser = require('body-parser');
 
+const dinoController = require('../Controllers/dinoController')(Dino)
+console.error( dinoController )
 Router.route('/')
-    .get((req, res) => {
-        const query = req.query
-        Dino.find(query, (err, dinos) => {
-            err ? res.status(500).send(err) : res.json(dinos)
-        });
-    })
-    .post((req, res) => {
-        const dino = new Dino(req.body)
-        dino.save()
-        res.status(201).send(dino)  // 201 means created
-    })
+    .get(dinoController.get)
+    .post(dinoController.post)
 
 
 Router.use('/:dinoId', (req, res, next) => {
@@ -24,6 +17,8 @@ Router.use('/:dinoId', (req, res, next) => {
         res.status(404).send('No dino found');
     })
 });
+
+
 
 Router.route('/:dinoId')
     .get((req, res) => {
