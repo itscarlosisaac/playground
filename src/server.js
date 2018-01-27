@@ -1,26 +1,22 @@
 const express = require('express');
-const jsonParser = require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const router = express.Router();
+const Router = require('./Routes');
 
 const PORT = 3000; 
 const app = express();
 
-
-
-/*
-    List of routes needed for the API
-
-    // GETS - POSTS - PUT - DELETE
-    - dino
-    - dino/:id
-    - facts
-*/
+// Opening connection with the database
+var db = mongoose.connect('mongodb://localhost/dinoAPI');
 
 app.get('/', (req, res) => {
     res.send("Hello world")
 });
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+app.use('/api/dinos', Router )
 
 app.listen( PORT, () => {
     console.log('app running on port ', PORT)
