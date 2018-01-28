@@ -4,7 +4,7 @@ const Dino = require('../db/Model');
 const bodyParser = require('body-parser');
 
 const dinoController = require('../Controllers/dinoController')(Dino)
-console.error( dinoController )
+
 Router.route('/')
     .get(dinoController.get)
     .post(dinoController.post)
@@ -17,8 +17,6 @@ Router.use('/:dinoId', (req, res, next) => {
         res.status(404).send('No dino found');
     })
 });
-
-
 
 Router.route('/:dinoId')
     .get((req, res) => {

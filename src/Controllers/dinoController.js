@@ -2,7 +2,8 @@ const dinoController = ( Dino ) => {
     const post = (req, res) => {
         const dino = new Dino(req.body)
         dino.save()
-        res.status(201).send(dino)  // 201 means created
+        res.status(201);
+        res.send(dino)  // 201 means created
     }
     const get = (req, res) => {
     
