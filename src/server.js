@@ -25,6 +25,33 @@ app.get('/about', (req, res) => {
     res.render('about')
 });
 
+app.get('/api/login', (req, res) => {
+    res.render('login', { email: req.body ?  req.body.email : null })
+});
+
+app.get('/register', (req, res) => {
+    res.render('register')
+});
+
+
+
+// Login Middleware
+
+function requiresLogin(req, res, next) {
+    if (req.session && req.session.userId) {
+      return next();
+    } else {
+      var err = new Error('You must be logged in to view this page.');
+      err.status = 401;
+      return next(err);
+    }
+  }
+// app.use()
+
+app.get('/profile' , requiresLogin , (req, res) => {
+    res.render('profile')
+})
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 

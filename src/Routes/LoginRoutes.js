@@ -11,9 +11,9 @@ LoginRouter.route('/')
             if( error || !user ){
                 const err = new Error('Wrong email or password');
                 err.status = 401;
-                return next(err)
+                res.render('login')
             }else{
-                res.send("Logged in")
+                res.render('profile')
             }
         })
     })

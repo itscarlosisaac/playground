@@ -1,0 +1,11 @@
+html
+    head
+        title Dinosarus API
+    body
+        h1 Login
+        form(action="/api/login" method="POST")
+            input(type="text" name="email" placeholder="email" required)
+            input(type="text" name="password" placeholder="password" required)
+            button(type="submit") Login
+        h2 #{email}
+        include partials/sidebar.pug
