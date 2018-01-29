@@ -10,6 +10,7 @@ UserRouter.route('/')
             err ? res.status(500).send(err) : res.json(users)
         });
     })
+    
     .post( (req, res, next) => {
         
         if ( req.body.password !== req.body.passwordConf ){
