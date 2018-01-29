@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Router = require('./Routes/Routes');
+const UserRouter = require('./Routes/UserRouter');
+const LoginRouter = require('./Routes/LoginRoutes');
+
 const path = require('path');
 
 const PORT = 3000; 
@@ -26,6 +29,11 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use('/api/dinos', Router )
+app.use('/api/users', UserRouter )
+app.use('/api/login', LoginRouter )
+
+
+
 
 app.listen( PORT, () => {
     console.log('app running on port ', PORT)
