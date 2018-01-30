@@ -13,7 +13,8 @@ LoginRouter.route('/')
                 err.status = 401;
                 res.render('login')
             }else{
-                res.render('profile')
+                req.session.userId = user._id;
+                return res.redirect('/profile');
             }
         })
     })

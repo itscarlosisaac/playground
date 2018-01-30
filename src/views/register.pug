@@ -3,4 +3,11 @@ html
         title Dinosarus API
     body
         h1 Register
+        form(action="/register" method="POST")
+            input(type="text" name="email" placeholder="Email" required)
+            input(type="text" name="username" placeholder="Username" required)
+            input(type="text" name="password" placeholder="Password" required)
+            input(type="text" name="passwordConf" placeholder="Password Confirmation" required)
+            button(type="submit") Register
+        h2 #{email}
         include partials/sidebar.pug
