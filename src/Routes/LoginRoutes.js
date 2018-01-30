@@ -3,7 +3,6 @@ const LoginRouter = express.Router();
 const bodyParser = require('body-parser')
 const UserModel = require('../db/UserModel')
 
-
 LoginRouter.route('/')
     .post( (req, res, next) => {
         UserModel.authenticate(req.body.email, req.body.password, function(error, user){

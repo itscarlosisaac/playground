@@ -48,13 +48,13 @@ app.get('/register', (req, res) => {
 });
 
 // Login Middleware
-
 function requiresLogin(req, res, next) {
     if (req.session && req.session.userId) {
         return next();
     } else {
         var err = new Error('You must be logged in to view this page.');
         err.status = 401;
+        res.send(err);
         return next(err);
     }
 }
@@ -91,9 +91,7 @@ app.get('/logout', (req, res, next) => {
     }
 })
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+app.use(bodyParser.urlencoded({ extended: true }) )
 app.use(bodyParser.json())
 
 app.use('/register', RegisterRouter)
