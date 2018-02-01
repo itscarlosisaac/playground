@@ -54,7 +54,8 @@ function requiresLogin(req, res, next) {
     } else {
         var err = new Error('You must be logged in to view this page.');
         err.status = 401;
-        res.send(err);
+        console.error(err)
+        res.render('requires_login');
         return next(err);
     }
 }
@@ -79,23 +80,18 @@ app.get('/profile', requiresLogin, (req, res) => {
         })
 })
 
-app.get('/logout', (req, res, next) => {
-    if( req.session ){
-        req.session.destroy( (err)  => {
-            if( err ){
-                return next(err)
-            }else{
-                return res.redirect('/login');
-            }
-        })
-    }
-})
-
 app.use(bodyParser.urlencoded({ extended: true }) )
 app.use(bodyParser.json())
 
 app.use('/register', RegisterRouter)
 app.use('/login', LoginRouter)
+
+app.get('/logout', (req, res, next) => {
+    return req.session ? 
+        req.session.destroy( (err)  => {
+            return err ? next(err) : res.redirect('/login');
+        }) : res.redirect('/login');
+});
 
 app.listen(PORT, () => {
     console.log('app running on port ', PORT)

@@ -4,13 +4,6 @@ const User = require('../db/UserModel')
 const bodyParser = require('body-parser')
 
 UserRouter.route('/')
-    // .get( (req, res) => {
-    //     const query = req.query
-    //     UserModel.find(query, (err, users) => {
-    //         err ? res.status(500).send(err) : res.json(users)
-    //     });
-    // })
-
     .post((req, res, next) => {
 
         if (req.body.password !== req.body.passwordConf) {
